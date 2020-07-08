@@ -42,6 +42,15 @@ namespace vote_standalone.Models.Sqlite3
             }
         }
 
+        public void Rollback()
+        {
+            if (ts != null)
+            {
+                ts.Rollback();
+                ts = null;
+            }
+        }
+
         public void Commit()
         {
             if (ts != null)

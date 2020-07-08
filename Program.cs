@@ -7,7 +7,6 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
-using vote_standalone.Models.Sqlite3;
 
 namespace vote_standalone
 {
@@ -15,12 +14,7 @@ namespace vote_standalone
     {
         public static void Main(string[] args)
         {
-            Sqlite3 sqlite = new Sqlite3();
-            sqlite.BeginTransaction();
-            User.Create("Revin", "a", sqlite);
-            sqlite.Commit();
-
-            //CreateHostBuilder(args).Build().Run();
+            CreateHostBuilder(args).Build().Run();
         }
 
         public static IHostBuilder CreateHostBuilder(string[] args) =>
