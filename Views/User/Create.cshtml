@@ -1,15 +1,16 @@
-﻿@{
+﻿@model vote_standalone.Models.FormInputs.User.CreateSubmit
+@{
     ViewData["Title"] = "ユーザ作成";
 }
 <script src="~/js/coffeejs/create_user.js"></script>
 
 
 
-<div>
+<form method="post" action="~/create_user_submit">
     <div class="form-group">
-        <input type="hidden" id="uuid">
-        <label for="username">名前</label>
-        <input type="text" class="form-control" id="display_name" placeholder="名前">
+        <input type="hidden" asp-for="Uuid" id="Uuid" >
+        <label for="DisplayName">名前</label>
+        <input type="text" class="form-control" id="DisplayName" asp-for="DisplayName" placeholder="名前">
     </div>
-    <button class="btn btn-primary" id="submit">登録</button>
-</div>
+    <button type="submit" class="btn btn-primary" id="submit">登録</button>
+</form>

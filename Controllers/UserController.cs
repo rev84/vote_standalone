@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using vote_standalone.Models;
 using vote_standalone.Models.Sqlite3;
+using vote_standalone.Models.FormInputs.User;
 
 namespace vote_standalone.Controllers
 {
@@ -18,10 +19,10 @@ namespace vote_standalone.Controllers
 
         [Route("create_user_submit")]
         [HttpPost]
-        public IActionResult CreateSubmit([FromBody] Dictionary<string, string> inputs)
+        public IActionResult CreateSubmit([FromForm] CreateSubmit inputs)
         {
-            string uuid = inputs.Get("uuid");
-            string displayName = inputs.Get("display_name");
+            string uuid = inputs.Uuid;
+            string displayName = inputs.DisplayName;
 
             Sqlite3 sqlite = new Sqlite3();
             try
