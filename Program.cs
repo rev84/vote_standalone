@@ -7,6 +7,8 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
+using vote_standalone.Models.Sqlite3;
+using vote_standalone.Models;
 
 namespace vote_standalone
 {

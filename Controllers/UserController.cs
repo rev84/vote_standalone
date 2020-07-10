@@ -14,6 +14,7 @@ namespace vote_standalone.Controllers
         [Route("create_user")]
         public IActionResult Create()
         {
+            string uuid = Cookie.GetUuid();
             return View();
         }
 
@@ -23,18 +24,22 @@ namespace vote_standalone.Controllers
         {
             string uuid = inputs.Uuid;
             string displayName = inputs.DisplayName;
+            string ip = RequestHelper.GetIp();
 
             Sqlite3 sqlite = new Sqlite3();
             try
             {
                 sqlite.BeginTransaction();
-                vote_standalone.Models.Sqlite3.User.Create(displayName, uuid, sqlite);
+                Users.Create(displayName, uuid, ip, sqlite);
                 sqlite.Commit();
             }
             catch (Exception e)
             {
                 sqlite.Rollback();
+                throw e;
             }
+
+            Cookie.SetUuid(uuid);
 
             return View();
         }

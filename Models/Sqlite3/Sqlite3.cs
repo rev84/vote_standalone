@@ -65,7 +65,59 @@ namespace vote_standalone.Models.Sqlite3
             cn.Close();
         }
 
-        public object ExecuteSql(string sql, object[] parameters = null)
+
+
+        public string GetOne(string sql, object[] parameters = null)
+        {
+            return GetSqledSQLiteCommand(sql, parameters).ExecuteScalar().ToString();
+        }
+
+        public Dictionary<string, string> GetLine(string sql, object[] parameters = null)
+        {
+            SQLiteDataReader sdr = GetSqledSQLiteCommand(sql, parameters).ExecuteReader();
+
+            sdr.Read();
+            var result = new Dictionary<string, string>();
+            for (int index = 0; index < sdr.FieldCount; index++)
+            {
+                var name = sdr.GetName(index);
+                var type = sdr.GetDataTypeName(index);
+                var value = sdr.GetString(index);
+
+                result.Add(name, value);
+            }
+
+            return result;
+        }
+
+        public List<Dictionary<string, string>> GetAll(string sql, object[] parameters = null)
+        {
+            var results = new List<Dictionary<string, string>>();
+            SQLiteDataReader sdr = GetSqledSQLiteCommand(sql, parameters).ExecuteReader();
+
+            while (sdr.Read())
+            {
+                var result = new Dictionary<string, string>();
+                for (int index = 0; index < sdr.FieldCount; index++)
+                {
+                    var name = sdr.GetName(index);
+                    var type = sdr.GetDataTypeName(index);
+                    var value = sdr.GetString(index);
+
+                    result.Add(name, value);
+                }
+
+                results.Add(result);
+            }
+
+            return results;
+        }
+        public int Execute(string sql, object[] parameters = null)
+        {
+            return GetSqledSQLiteCommand(sql, parameters).ExecuteNonQuery();
+        }
+
+        private SQLiteCommand GetSqledSQLiteCommand(string sql, object[] parameters = null)
         {
             Open();
 
@@ -80,7 +132,7 @@ namespace vote_standalone.Models.Sqlite3
                     }
                 );
             }
-            return cmd.ExecuteScalar();
+            return cmd;
         }
     }
 }

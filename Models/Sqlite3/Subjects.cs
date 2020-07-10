@@ -5,15 +5,17 @@ using System.Threading.Tasks;
 
 namespace vote_standalone.Models.Sqlite3
 {
-    public class User
+    public class Subjects
     {
-        public static void Create(string name, string uuid, Sqlite3 sqlite = null)
+        
+        public static void GetNow(Sqlite3 sqlite = null)
         {
-            Sqlite3.Get(sqlite).ExecuteSql(
-                "insert into users "+
+            int nowSubjectId = Infos.GetNowSubjectId();
+            Sqlite3.Get(sqlite).GetOne(
+                "select * users "+
                 "(name, uuid, created_at) values "+
                 "(?, ?, ?) ",
-                new object[] { name, uuid, Timer.GetDatetime()}
+                new object[] { nowSubjectId }
             );
         }
     }
