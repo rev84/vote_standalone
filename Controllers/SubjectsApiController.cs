@@ -18,11 +18,17 @@ namespace vote_standalone.Controllers
         [HttpPost]
         public string Create([FromBody] JsonElement body)
         {
+            if (!MyUser.Login(Cookie.GetUuid()))
+            {
+                throw new Exception();
+            }
+
             Create inputs = JsonSerializer.Deserialize<Create>(body.ToString());
             try
             {
+                inputs.Validate();
                 MySqlite.BeginTransaction();
-                Subjects.Create(inputs.Title, inputs.Artist, inputs.Url, inputs.Comment);
+                Subjects.Create(MyUser.GetId(), inputs.Title, inputs.Artist, inputs.Url, inputs.Comment);
                 MySqlite.Commit();
                 MySqlite.Close();
             }
@@ -30,10 +36,10 @@ namespace vote_standalone.Controllers
             {
                 MySqlite.Rollback();
                 MySqlite.Close();
-                throw e;
+                this.Response.StatusCode = 500;
+                return Utility.ApiResponse(new { is_success = false });
             }
-            return
-                JsonSerializer.Serialize<object>(new { is_success = true });
+            return Utility.ApiResponse(new { is_success = true });
         }
     }
 }

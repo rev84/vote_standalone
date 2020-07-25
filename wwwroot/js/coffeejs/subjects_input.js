@@ -7,15 +7,22 @@ $().ready(function() {
 
 submit = function() {
   var params;
+  $('#submit').prop('disabled', true);
   params = {
-    Title: $('#Title').val(),
-    Artist: $('#Artist').val(),
+    Title: $('#Title').val() === '' ? null : $('#Title').val(),
+    Artist: $('#Artist').val() === '' ? null : $('#Artist').val(),
     Comment: $('#Comment').val() === '' ? null : $('#Comment').val(),
-    Url: $('#Url').val()
+    Url: $('#Url').val() === '' ? null : $('#Url').val()
   };
   return Utl.request('subjects/create', params, onSuccess, onFailure);
 };
 
-onSuccess = function(res) {};
+onSuccess = function(res) {
+  window.alert('登録に成功しました。');
+  return location.reload();
+};
 
-onFailure = function(res) {};
+onFailure = function(res) {
+  window.alert('登録に失敗しました。');
+  return $('#submit').prop('disabled', false);
+};

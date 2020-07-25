@@ -15,6 +15,13 @@ namespace vote_standalone.Controllers
         [Route("subjects/input")]
         public IActionResult Input()
         {
+            if (!MyUser.Login(Cookie.GetUuid()))
+            {
+                throw new Exception();
+            }
+
+            ViewData["MySubjects"] = Subjects.GetMine(MyUser.GetId());
+
             return View();
         }
     }

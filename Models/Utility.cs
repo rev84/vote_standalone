@@ -1,7 +1,9 @@
-﻿using System;
+﻿using Microsoft.AspNetCore.Mvc.ApiExplorer;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using System.Text.Json;
 
 namespace vote_standalone.Models
 {
@@ -20,6 +22,11 @@ namespace vote_standalone.Models
         public static string GetDatetime()
         {
             return DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss");
+        }
+
+        public static string ApiResponse(object obj)
+        {
+            return JsonSerializer.Serialize<object>(obj);
         }
     }
 }

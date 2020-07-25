@@ -1,4 +1,11 @@
+@{
+    var MySubjects = ViewData["MySubjects"] as List<Dictionary<string, object>>;
+}
+
 <script src="/js/coffeejs/subjects_input.js"></script>
+
+<h1>項目登録</h1>
+
 <div id="form">
     <div class="form-group">
         <label for="Title">タイトル</label>
@@ -18,3 +25,26 @@
     </div>
     <button class="btn btn-primary" id="submit">登録</button>
 </div>
+
+<h2>あなたの投稿</h2>
+
+<table class="table table-bordered">
+    <tr>
+        <th>No</th>
+        <th>曲名</th>
+        <th>アーティスト名</th>
+        <th>URL</th>
+        <th>コメント</th>
+    </tr>
+    @foreach (Dictionary<string, object> subject in MySubjects)
+    {
+        <tr>
+            <th>@subject["id"]</th>
+            <td>@subject["title"]</td>
+            <td>@subject["artist"]</td>
+            <td>@subject["url"]</td>
+            <td>@subject["comment"]</td>
+        </tr>
+    }
+
+</table>

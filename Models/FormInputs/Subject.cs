@@ -19,19 +19,19 @@ namespace vote_standalone.Models.FormInputs.Subject
 
         public void Validate()
         {
-            if (Title.Length < 1 || 100 < Title.Length)
+            if (Title == null || Title.Length < 1 || 100 < Title.Length)
             {
                 throw new Exception();
             }
-            if (Artist.Length < 1 || 100 < Artist.Length)
+            if (Artist == null || Artist.Length < 1 || 100 < Artist.Length)
             {
                 throw new Exception();
             }
-            if (Url.Length < 1 || 200 < Url.Length)
+            if (Url == null || Url.Length < 1 || 200 < Url.Length)
             {
                 throw new Exception();
             }
-            if (Comment.Length < 1 || 200 < Comment.Length)
+            if (Comment != null && (Comment.Length < 1 || 200 < Comment.Length))
             {
                 throw new Exception();
             }
