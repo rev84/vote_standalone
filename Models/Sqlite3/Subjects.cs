@@ -3,20 +3,24 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace vote_standalone.Models.Sqlite3
+namespace vote_standalone.Models.Sqlite
 {
     public class Subjects
     {
-        
-        public static void GetNow(Sqlite3 sqlite = null)
+        public static List<Dictionary<string, object>> GetAll()
         {
-            int nowSubjectId = Infos.GetNowSubjectId();
-            Sqlite3.Get(sqlite).GetOne(
-                "select * users "+
-                "(name, uuid, created_at) values "+
-                "(?, ?, ?) ",
-                new object[] { nowSubjectId }
+            return MySqlite.GetAll(
+                "select user_id, title, artist, url, comment, created_at from subjects "
             );
+        }
+        public static bool Create(string title, string artist, string url, string comment)
+        {
+            return MySqlite.Execute(
+                "insert into subjects " +
+                "(title, artist, url, comment, created_at) values " +
+                "(?, ?, ?, ?, ?) ",
+                new object[] { title, artist, url, comment, Utility.GetDatetime() }
+            ) >= 1;
         }
     }
 }

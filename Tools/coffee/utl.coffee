@@ -7,7 +7,18 @@ class window.Utl
       uuid += (if i is 12 then 4 else (if i is 16 then random & 3 | 8 else random)).toString(16);
     uuid
 
-  @request:(endpoint, params)->
+  @request:(api, params, onSuccess = (->), onFailure = (->))->
+    $.ajax({
+        type: "POST"
+        contentType: "application/json"
+        url: '/'+api
+        data: JSON.stringify params
+        success: onSuccess
+        error: onFailure
+    })
+
+
+  @form_post:(endpoint, params)->
     postdata = {}
     func = (value, relay = [])->
       $.each value, (k, v)->

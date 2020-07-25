@@ -3,8 +3,10 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
+using Newtonsoft.Json;
 using vote_standalone.Models;
 
 namespace vote_standalone.Controllers
@@ -12,6 +14,35 @@ namespace vote_standalone.Controllers
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;
+
+        [Route("")]
+        public IActionResult Index()
+        {
+            if (!MyUser.Login(Cookie.GetUuid()))
+            {
+                MyUser.CreateUser();
+            }
+
+            MySqlite.Close();
+            return View();
+        }
+
+        [Route("get_subjects")]
+        public IActionResult GetSubjects()
+        {
+            if (!MyUser.Login(Cookie.GetUuid()))
+            {
+                throw new Exception();
+            }
+
+            var results = HomeHelper.GetSubjects(MyUser.GetId());
+            MySqlite.Close();
+            return Content(
+                JsonConvert.SerializeObject(results),
+                "application/json"
+            );
+        }
+
 
         public HomeController(ILogger<HomeController> logger)
         {

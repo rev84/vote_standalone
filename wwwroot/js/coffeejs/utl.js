@@ -15,7 +15,24 @@ window.Utl = (function() {
     return uuid;
   };
 
-  Utl.request = function(endpoint, params) {
+  Utl.request = function(api, params, onSuccess, onFailure) {
+    if (onSuccess == null) {
+      onSuccess = (function() {});
+    }
+    if (onFailure == null) {
+      onFailure = (function() {});
+    }
+    return $.ajax({
+      type: "POST",
+      contentType: "application/json",
+      url: '/' + api,
+      data: JSON.stringify(params),
+      success: onSuccess,
+      error: onFailure
+    });
+  };
+
+  Utl.form_post = function(endpoint, params) {
     var form, func, postdata;
     postdata = {};
     func = function(value, relay) {

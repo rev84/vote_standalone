@@ -25,7 +25,6 @@ namespace vote_standalone
         {
             services.AddControllersWithViews();
             services.AddHttpContextAccessor();
-            services.AddSession();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -44,7 +43,6 @@ namespace vote_standalone
             app.UseRouting();
 
             app.UseAuthorization();
-            app.UseSession();
 
             System.Web.HttpContext.Configure(app.ApplicationServices.
                 GetRequiredService<Microsoft.AspNetCore.Http.IHttpContextAccessor>()

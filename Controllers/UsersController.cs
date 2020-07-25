@@ -4,24 +4,19 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using vote_standalone.Models;
-using vote_standalone.Models.Sqlite3;
+using vote_standalone.Models.Sqlite;
 using vote_standalone.Models.FormInputs.User;
 
 namespace vote_standalone.Controllers
 {
-    public class UserController : Controller
+    public class UsersController : Controller
     {
-        [Route("create_user")]
-        public IActionResult Create()
-        {
-            string uuid = Cookie.GetUuid();
-            return View();
-        }
-
+        /*
         [Route("create_user_submit")]
         [HttpPost]
         public IActionResult CreateSubmit([FromForm] CreateSubmit inputs)
         {
+            inputs.Validate();
             string uuid = inputs.Uuid;
             string displayName = inputs.DisplayName;
             string ip = RequestHelper.GetIp();
@@ -43,5 +38,6 @@ namespace vote_standalone.Controllers
 
             return View();
         }
+        */
     }
 }

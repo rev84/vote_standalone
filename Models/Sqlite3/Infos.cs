@@ -4,25 +4,24 @@ using System.Linq;
 using System.Security.Cryptography.X509Certificates;
 using System.Threading.Tasks;
 
-namespace vote_standalone.Models.Sqlite3
+namespace vote_standalone.Models.Sqlite
 {
     public class Infos
     {
         public const string KEY_NOW_SUBJECT_ID = "now_subject_id";
 
-        public static int GetNowSubjectId(Sqlite3 sqlite = null)
+        public static int? GetNowSubjectId()
         {
-            return Convert.ToInt32(Get(KEY_NOW_SUBJECT_ID));
+            return Utility.ToNullableInt(Get(KEY_NOW_SUBJECT_ID));
         }
 
-        private static string Get(string key, Sqlite3 sqlite = null)
+        private static string Get(string key)
         {
-            Sqlite3.Get(sqlite).GetOne(
+            return MySqlite.GetOne(
                 "select value from infos " +
                 "where key = ? ",
                 new object[] { key }
             );
-            return "";
         }
     }
 }
