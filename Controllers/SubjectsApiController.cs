@@ -24,21 +24,31 @@ namespace vote_standalone.Controllers
             }
 
             Create inputs = JsonSerializer.Deserialize<Create>(body.ToString());
-            try
+            inputs.Validate();
+            Subjects.Create(MyUser.GetId(), inputs.Title, inputs.Artist, inputs.Url, inputs.Comment);
+            MySqlite.Close();
+            return Utility.ApiResponse(new { is_success = true });
+        }
+
+        [Route("subjects/vote")]
+        [HttpPost]
+        public string Vote([FromBody] JsonElement body)
+        {
+            if (!MyUser.Login(Cookie.GetUuid()))
             {
-                inputs.Validate();
-                MySqlite.BeginTransaction();
-                Subjects.Create(MyUser.GetId(), inputs.Title, inputs.Artist, inputs.Url, inputs.Comment);
-                MySqlite.Commit();
-                MySqlite.Close();
+                throw new Exception();
             }
-            catch (Exception e)
-            {
-                MySqlite.Rollback();
-                MySqlite.Close();
-                this.Response.StatusCode = 500;
-                return Utility.ApiResponse(new { is_success = false });
-            }
+
+            Vote inputs = JsonSerializer.Deserialize<Vote>(body.ToString());
+            inputs.Validate();
+            SubjectVotes.Replace(
+                Convert.ToInt32(inputs.SubjectId),
+                Convert.ToInt32(MyUser.GetId()),
+                Convert.ToInt32(inputs.Point),
+                inputs.Comment
+            );
+            MySqlite.Close();
+
             return Utility.ApiResponse(new { is_success = true });
         }
     }

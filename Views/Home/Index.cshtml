@@ -6,7 +6,10 @@
 
 <script src="/js/coffeejs/index.js"></script>
 <script>
-    let data = @(ViewData["Json"]);
+    window.POINT_MIN = @(vote_standalone.Models.FormInputs.Subject.Vote.POINT_LENGTH_MIN);
+    window.POINT_MAX = @(vote_standalone.Models.FormInputs.Subject.Vote.POINT_LENGTH_MAX);
+    window.COMMENT_MIN = @(vote_standalone.Models.FormInputs.Subject.Vote.COMMENT_LENGTH_MIN);
+    window.COMMENT_MAX = @(vote_standalone.Models.FormInputs.Subject.Vote.COMMENT_LENGTH_MAX);
 </script>
 
 <h1>今の投票対象</h1>

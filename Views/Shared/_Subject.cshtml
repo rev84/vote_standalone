@@ -34,8 +34,11 @@
     <span class="point_text">pts.</span>
 </div>
 <div class="center">
-    <input type="range" subject_id="@(Id)" class="slider" value="50" min="0" max="100" step="1" />
+    <input type="range" subject_id="@(Id)" class="slider" value="50" min="@(vote_standalone.Models.FormInputs.Subject.Vote.POINT_LENGTH_MIN)" max="@(vote_standalone.Models.FormInputs.Subject.Vote.POINT_LENGTH_MAX)" step="1" />
 </div>
 <div class="center">
-    <button class="btn btn-hg btn-primary vote">投票</button>
+    <input type="text" subject_id="@(Id)" class="comment form-control" maxlength="50" placeholder="任意　コメント@(vote_standalone.Models.FormInputs.Subject.Vote.COMMENT_LENGTH_MAX)文字まで"/>
+</div>
+<div class="center">
+    <button class="btn btn-hg btn-primary vote" subject_id="@(Id)">投票</button>
 </div>
