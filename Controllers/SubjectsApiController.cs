@@ -26,7 +26,6 @@ namespace vote_standalone.Controllers
             Create inputs = JsonSerializer.Deserialize<Create>(body.ToString());
             inputs.Validate();
             Subjects.Create(MyUser.GetId(), inputs.Title, inputs.Artist, inputs.Url, inputs.Comment);
-            MySqlite.Close();
             return Utility.ApiResponse(new { is_success = true });
         }
 
@@ -47,7 +46,6 @@ namespace vote_standalone.Controllers
                 Convert.ToInt32(inputs.Point),
                 inputs.Comment
             );
-            MySqlite.Close();
 
             return Utility.ApiResponse(new { is_success = true });
         }

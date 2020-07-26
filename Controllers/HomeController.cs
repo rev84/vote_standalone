@@ -26,7 +26,6 @@ namespace vote_standalone.Controllers
 
             ViewData["Subjects"] = Subjects.GetAll();
             ViewData["Now"] = Infos.GetNowSubjectId();
-            MySqlite.Close();
             return View();
         }
 

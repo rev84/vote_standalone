@@ -11,21 +11,9 @@ namespace vote_standalone.Models
         // Sqliteファイルの場所
         private const string SQLITE_FILE_PATH = ".\\Resources\\db.sqlite3";
 
-        private static SQLiteConnectionStringBuilder sqlConnectionSb
-        {
-            set { RequestHelper.SetVal(RequestHelper.ITEM_SQLiteConnectionStringBuilder, value); }
-            get { return (SQLiteConnectionStringBuilder)RequestHelper.GetVal(RequestHelper.ITEM_SQLiteConnectionStringBuilder); }
-        }
-        private static SQLiteConnection cn
-        {
-            set { RequestHelper.SetVal(RequestHelper.ITEM_SQLiteConnection, value); }
-            get { return (SQLiteConnection)RequestHelper.GetVal(RequestHelper.ITEM_SQLiteConnection); }
-        }
-        private static SQLiteTransaction ts
-        {
-            set { RequestHelper.SetVal(RequestHelper.ITEM_SQLiteTransaction, value); }
-            get { return (SQLiteTransaction)RequestHelper.GetVal(RequestHelper.ITEM_SQLiteTransaction); }
-        }
+        private static SQLiteConnectionStringBuilder sqlConnectionSb = null;
+        private static SQLiteConnection cn = null;
+        private static SQLiteTransaction ts = null;
 
         public static void Init()
         {
