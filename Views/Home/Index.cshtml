@@ -1,10 +1,25 @@
 ﻿@{
     ViewData["Title"] = "Home";
+    var Subjects = ViewData["Subjects"] as List<Dictionary<string, object>>;
+    var Now = ViewData["now"] as int?;
 }
 
+<script src="/js/coffeejs/index.js"></script>
 <script>
     let data = @(ViewData["Json"]);
 </script>
 
 <h1>今の投票対象</h1>
 
+@foreach (Dictionary<string, object> value in Subjects)
+{
+    Html.RenderPartial("_Subject", new ViewDataDictionary(this.ViewData)
+    {
+        {"Id", value["id"] },
+        {"SongTitle", value["title"] },
+        {"Artist", value["artist"] },
+        {"Comment", value["comment"] },
+        {"Url", value["url"] },
+        {"PointAverage", "0" }
+    });
+}

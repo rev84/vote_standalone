@@ -8,6 +8,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using Newtonsoft.Json;
 using vote_standalone.Models;
+using vote_standalone.Models.Sqlite;
 
 namespace vote_standalone.Controllers
 {
@@ -23,10 +24,13 @@ namespace vote_standalone.Controllers
                 MyUser.CreateUser();
             }
 
+            ViewData["Subjects"] = Subjects.GetAll();
+            ViewData["Now"] = Infos.GetNowSubjectId();
             MySqlite.Close();
             return View();
         }
 
+        /*
         [Route("get_subjects")]
         public IActionResult GetSubjects()
         {
@@ -42,6 +46,7 @@ namespace vote_standalone.Controllers
                 "application/json"
             );
         }
+        */
 
 
         public HomeController(ILogger<HomeController> logger)

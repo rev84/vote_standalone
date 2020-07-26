@@ -69,3 +69,39 @@ body {
   white-space: nowrap;
   line-height: 60px; /* Vertically center the text there */
 }
+
+div.center {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.point {
+  height: 50px;
+  width: 150px;
+  font-size: 40px;
+  font-weight: bold;
+  font-family: 'Mitr', sans-serif;
+  text-align: center;
+  margin-top: 10px;
+
+  border: 3px solid #000;
+  color: #000;
+  border-radius: 9px;
+}
+.point_text {
+  font-size: 30px;
+  font-family: 'Mitr', sans-serif;
+}
+
+.slider {
+  width: 100%;
+  margin-top: 10px;
+}
+
+.vote {
+  width: 120px;
+  font-size: 30px;
+  vertical-align: middle;
+  margin-top: 10px;
+}

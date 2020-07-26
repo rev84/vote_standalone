@@ -1,21 +1,41 @@
 @{
-   var Song = ViewData["Song"];
+    var Id = ViewData["Id"];
+    var SongTitle = ViewData["SongTitle"];
+    var Artist = ViewData["Artist"];
+    var Url = ViewData["Url"];
+    var Comment = ViewData["Comment"];
+    var PointAverage = ViewData["PointAverage"];
 }
-<table>
+<table class="table table-bordered table-striped">
     <tr>
         <th>曲名</th>
-        <td>@(Song)</td>
+        <td>@(SongTitle)</td>
     </tr>
     <tr>
         <th>アーティスト名</th>
-        <td>@(Song)</td>
+        <td>@(Artist)</td>
     </tr>
     <tr>
         <th>URL</th>
-        <td>@(Song)</td>
+        <td>@(Url)</td>
+    </tr>
+    <tr>
+        <th>コメント</th>
+        <td>@(Comment)</td>
     </tr>
     <tr>
         <th>平均点</th>
-        <td>@(Song)</td>
+        <td>@(PointAverage)</td>
     </tr>
 </table>
+
+<div class="center">
+    <input type="text" subject_id="@(Id)" class="point" />
+    <span class="point_text">pts.</span>
+</div>
+<div class="center">
+    <input type="range" subject_id="@(Id)" class="slider" value="50" min="0" max="100" step="1" />
+</div>
+<div class="center">
+    <button class="btn btn-hg btn-primary vote">投票</button>
+</div>
