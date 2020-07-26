@@ -109,3 +109,8 @@ div.center {
   vertical-align: middle;
   margin-top: 10px;
 }
+
+.subject {
+  padding: 5px;
+  margin-bottom: 60px;
+}

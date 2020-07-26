@@ -6,39 +6,41 @@
     var Comment = ViewData["Comment"];
     var PointAverage = ViewData["PointAverage"];
 }
-<table class="table table-bordered table-striped">
-    <tr>
-        <th>曲名</th>
-        <td>@(SongTitle)</td>
-    </tr>
-    <tr>
-        <th>アーティスト名</th>
-        <td>@(Artist)</td>
-    </tr>
-    <tr>
-        <th>URL</th>
-        <td>@(Url)</td>
-    </tr>
-    <tr>
-        <th>コメント</th>
-        <td>@(Comment)</td>
-    </tr>
-    <tr>
-        <th>平均点</th>
-        <td>@(PointAverage)</td>
-    </tr>
-</table>
+    <div class="card border-dark subject">
+        <table class="table table-bordered table-striped">
+            <tr>
+                <th>曲名</th>
+                <td>@(SongTitle)</td>
+            </tr>
+            <tr>
+                <th>アーティスト名</th>
+                <td>@(Artist)</td>
+            </tr>
+            <tr>
+                <th>URL</th>
+                <td>@(Url)</td>
+            </tr>
+            <tr>
+                <th>コメント</th>
+                <td>@(Comment)</td>
+            </tr>
+            <tr>
+                <th>平均点</th>
+                <td>@(PointAverage)</td>
+            </tr>
+        </table>
 
-<div class="center">
-    <input type="text" subject_id="@(Id)" class="point" />
-    <span class="point_text">pts.</span>
-</div>
-<div class="center">
-    <input type="range" subject_id="@(Id)" class="slider" value="50" min="@(vote_standalone.Models.FormInputs.Subject.Vote.POINT_LENGTH_MIN)" max="@(vote_standalone.Models.FormInputs.Subject.Vote.POINT_LENGTH_MAX)" step="1" />
-</div>
-<div class="center">
-    <input type="text" subject_id="@(Id)" class="comment form-control" maxlength="50" placeholder="任意　コメント@(vote_standalone.Models.FormInputs.Subject.Vote.COMMENT_LENGTH_MAX)文字まで"/>
-</div>
-<div class="center">
-    <button class="btn btn-hg btn-primary vote" subject_id="@(Id)">投票</button>
-</div>
+        <div class="center">
+            <input type="text" subject_id="@(Id)" class="point" />
+            <span class="point_text">pts.</span>
+        </div>
+        <div class="center">
+            <input type="range" subject_id="@(Id)" class="slider" value="50" min="@(vote_standalone.Models.FormInputs.Subject.Vote.POINT_LENGTH_MIN)" max="@(vote_standalone.Models.FormInputs.Subject.Vote.POINT_LENGTH_MAX)" step="1" />
+        </div>
+        <div class="center">
+            <input type="text" subject_id="@(Id)" class="comment form-control" maxlength="50" placeholder="任意　コメント@(vote_standalone.Models.FormInputs.Subject.Vote.COMMENT_LENGTH_MAX)文字まで" />
+        </div>
+        <div class="center">
+            <button class="btn btn-hg btn-primary vote" subject_id="@(Id)">投票</button>
+        </div>
+    </div>
