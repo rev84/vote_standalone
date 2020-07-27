@@ -17,15 +17,17 @@
 @foreach (Dictionary<string, object> value in Subjects)
 {
     if (Now == null) break;
-    if (Convert.ToInt32(value["id"]) != Convert.ToInt32(Now)) continue;
+    if (Convert.ToInt32(value["subject_id"]) != Convert.ToInt32(Now)) continue;
 
     Html.RenderPartial("_Subject", new ViewDataDictionary(this.ViewData)
-{
-        {"Id", value["id"] },
+    {
+        {"SubjectId", value["subject_id"] },
         {"SongTitle", value["title"] },
         {"Artist", value["artist"] },
-        {"Comment", value["comment"] },
+        {"Comment", value["subject_comment"] },
         {"Url", value["url"] },
+        {"VoteComment", value["vote_comment"] },
+        {"VotePoint", value["point"] },
         {"PointAverage", "0" }
     });
     break;
@@ -34,15 +36,17 @@
 <h1>過去の投票対象</h1>
 @foreach (Dictionary<string, object> value in Subjects)
 {
-    if (Now != null && Convert.ToInt32(value["id"]) == Convert.ToInt32(Now)) continue;
+    if (Now != null && Convert.ToInt32(value["subject_id"]) == Convert.ToInt32(Now)) continue;
 
     Html.RenderPartial("_Subject", new ViewDataDictionary(this.ViewData)
-{
-        {"Id", value["id"] },
+    {
+        {"SubjectId", value["subject_id"] },
         {"SongTitle", value["title"] },
         {"Artist", value["artist"] },
-        {"Comment", value["comment"] },
+        {"Comment", value["subject_comment"] },
         {"Url", value["url"] },
+        {"VoteComment", value["vote_comment"] },
+        {"VotePoint", value["point"] },
         {"PointAverage", "0" }
     });
 }

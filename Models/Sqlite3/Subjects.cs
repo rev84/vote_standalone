@@ -23,6 +23,19 @@ namespace vote_standalone.Models.Sqlite
                 "order by id asc "
             );
         }
+        public static List<Dictionary<string, object>> GetAllWithMyVote(int? userId)
+        {
+            return MySqlite.GetAll(
+                "select subjects.id as subject_id, subjects.user_id as user_id, "+
+                "title, artist, url, subjects.comment as subject_comment, "+
+                "subject_votes.comment as vote_comment, point, subject_votes.id as vote_id " +
+                "from subjects " +
+                "left join subject_votes on "+
+                "subject_votes.subject_id = subjects.id " +
+                "where subject_votes.user_id = ? or subject_votes.user_id is null ",
+                new object[] { userId }
+            );
+        }
         public static List<Dictionary<string, object>> GetMine(int? userId)
         {
             return MySqlite.GetAll(

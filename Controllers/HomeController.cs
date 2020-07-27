@@ -24,7 +24,7 @@ namespace vote_standalone.Controllers
                 MyUser.CreateUser();
             }
 
-            ViewData["Subjects"] = Subjects.GetAll();
+            ViewData["Subjects"] = Subjects.GetAllWithMyVote(MyUser.GetId());
             ViewData["Now"] = Infos.GetNowSubjectId();
             return View();
         }
